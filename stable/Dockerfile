@@ -33,6 +33,10 @@ RUN groupadd --gid $GID $USER \
 USER $USER
 WORKDIR /home/$USER
 
+
+
+
+
 # android sdk
 RUN mkdir -p $ANDROID_SDK_ROOT \
   && mkdir -p /home/$USER/.android \
@@ -60,6 +64,18 @@ RUN curl -o flutter.tar.xz $FLUTTER_URL \
   && flutter doctor \
   && flutter emulators --create \
   && flutter update-packages
+
+
+# Use node v8.16.0
+RUN curl -sSL "https://nodejs.org/dist/v8.16.0/node-v8.16.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v8.16.0-linux-x64/bin/node
+RUN curl https://www.npmjs.com/install.sh | sudo bash
+
+# Install firebase tools
+RUN SUDO npm install -g firebase-tools
+
+# Check node and npm versions
+RUN node --version
+RUN npm --version
 
 COPY entrypoint.sh /usr/local/bin/
 COPY chown.sh /usr/local/bin/
