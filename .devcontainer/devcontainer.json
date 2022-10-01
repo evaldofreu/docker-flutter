@@ -1,0 +1,8 @@
+{
+    "name": "Flutter",
+    "image": "evaldofreu/flutter",
+    "extensions": [
+        "dart-code.dart-code",
+        "dart-code.flutter"
+    ]
+}

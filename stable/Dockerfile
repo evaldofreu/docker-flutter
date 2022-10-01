@@ -66,18 +66,18 @@ RUN curl -o flutter.tar.xz $FLUTTER_URL \
   && flutter update-packages
 
 
-# Use node v8.16.0
-RUN curl -sSL "https://nodejs.org/dist/v8.16.0/node-v8.16.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v8.16.0-linux-x64/bin/node
+# Use node v16.17
+RUN curl -sSL "https://nodejs.org/dist/v16.17.1/node-v16.17.1-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v16.17.1-linux-x64/bin/node
 RUN curl https://www.npmjs.com/install.sh | sudo bash
 
 # Install firebase tools
-RUN SUDO npm install -g firebase-tools
+RUN sudo npm install -g firebase-tools
 
 # Check node and npm versions
 RUN node --version
 RUN npm --version
 
-COPY entrypoint.sh /usr/local/bin/
-COPY chown.sh /usr/local/bin/
+COPY entrypoint.sh /usr/local/bin
+COPY chown.sh /usr/local/bin
 COPY flutter-android-emulator.sh /usr/local/bin/flutter-android-emulator
 ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
